@@ -4,7 +4,8 @@ import java.awt.Graphics;
 
 public class BarPanel extends JPanel {
     private int[] values = {};
-    private Integer hightlight = null;
+    private int hightlightA = 0;
+    private int hightlightB = 0;
 
 
     public void showArray(int[] values){
@@ -12,8 +13,9 @@ public class BarPanel extends JPanel {
         repaint();
     }
 
-    public void setHighlight(int hightlight){
-        this.hightlight = hightlight;
+    public void setHighlight(int hightlightA, int hightlightB){
+        this.hightlightA = hightlightA;
+        this.hightlightB = hightlightB;
         repaint();
     }
 
@@ -21,7 +23,7 @@ public class BarPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if(values == null || values.length == 0 || hightlight == null) {
+        if(values == null || values.length == 0) {
             System.out.println("Something went wrong");
             return;
         }
@@ -40,7 +42,7 @@ public class BarPanel extends JPanel {
         for(int i = 0; i < values.length; i++) {
             int barHeight = (int) ((values[i] / (double) max) * (height - 20));
 
-            if(i == hightlight || i == hightlight + 1) {
+            if(i == hightlightA || i == hightlightB) {
                 g.setColor(Color.RED);
             } else {
                 g.setColor(Color.BLUE);

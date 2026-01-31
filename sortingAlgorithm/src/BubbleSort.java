@@ -1,46 +1,37 @@
-public class BubbleSort {
-    private Visualizer visualizer;
-    private int[] data;
+import javax.swing.*;
 
-    public BubbleSort(int[] startData) throws InterruptedException {
-        this.data = startData;
-        visualizer = new Visualizer(startData);
-
-        new Thread(() -> {
-            try {
-                runSort();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
-
+public class BubbleSort extends Sorter {
+    public BubbleSort(int[] data, int speed) {
+        super(data, speed);
+        this.visualizer.getFrame().setTitle("Bubble Sort");
     }
 
-    public void runSort() throws InterruptedException {
-        boolean isSorted = false;
-        boolean hasSwapped;
 
-        while (!isSorted) {
-            hasSwapped = false;
-            for (int i = 0; i < this.data.length - 1; i++) {
-                Thread.sleep(1);
-                visualizer.getPanel().setHighlight(i);
-                if (this.data[i] > this.data[i + 1]) {
-                    swap(data, i, i + 1);
-                    hasSwapped = true;
+    @Override
+    public void sort() {
+        int latestSwap = data.length - 1;
+        int endInterval;
+        for(int i = 0; i < data.length; i++) {
+
+            endInterval = latestSwap;
+            latestSwap = -1;
+            for(int j = 0; j < endInterval; j++) {
+                visualizer.getPanel().setHighlight(j,j + 1);
+                try {
+                    Thread.sleep(speed);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                if(data[j] > data[j + 1]) {
+                    swap(j,j + 1);
+                    latestSwap = j + 1;
                 }
             }
-            if (!hasSwapped) {
-                isSorted = true;
-            }
+            if(latestSwap == -1) {break;}
         }
+        this.visualizer.pauseTimer();
+
     }
 
 
-    public int[] swap(int[] data, int start, int end) {
-        int temp = data[start];
-        data[start] = data[end];
-        data[end] = temp;
-        return data;
-    }
 }

@@ -1,9 +1,8 @@
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-
-        new BubbleSort(ArrayMaker.randomArray(200));
-        new CocktailShakerSort(ArrayMaker.randomArray(200));
-
+        int[] arr = ArrayMaker.randomLinearArray(200);
+        new BubbleSort(arr,1);
+        new CocktailShakerSort(arr,1);
 
     }
 }

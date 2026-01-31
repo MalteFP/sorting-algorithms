@@ -1,17 +1,36 @@
 import javax.swing.JFrame;
+import javax.swing.Timer;
+import javax.swing.JLabel;
+import java.awt.*;
+
 
 public class Visualizer {
 
     private BarPanel panel;
     private int[] data;
+    private String windowTitle;
+    private JFrame frame;
+    private Timer timer;
+    private int seconds;
+    private JLabel timerLabel;
 
-   public Visualizer(int[] data) {
+   public Visualizer(int[] data, String windowTitle) {
        this.data = data;
-       JFrame frame = new JFrame("Sorting Visualizer");
+       this.windowTitle = windowTitle;
+       this.frame = new JFrame(this.windowTitle);
+
+
+
+       timerLabel = new JLabel("Time: 0 ms");
+       frame.add(timerLabel, BorderLayout.NORTH);
+
+       timer = new Timer(1, e-> {
+           seconds++;
+           timerLabel.setText("Time: " + seconds + " ms");
+       });
 
        panel = new BarPanel();
-       panel.setHighlight(0);
-       frame.add(panel);
+       frame.add(panel, BorderLayout.CENTER);
 
        frame.setSize(600, 400);
        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,6 +52,18 @@ public class Visualizer {
 
    public void getData(int[] data) {
        this.data = data;
+   }
+
+   public JFrame getFrame() {
+       return frame;
+   }
+
+   public void pauseTimer() {
+       timer.stop();
+   }
+
+   public void startTimer() {
+       timer.start();
    }
 
 }

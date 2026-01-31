@@ -1,55 +1,51 @@
-public class CocktailShakerSort {
-    private Visualizer visualizer;
-    private int[] data;
+public class CocktailShakerSort extends Sorter {
 
-    public CocktailShakerSort(int[] startData) throws InterruptedException {
-        this.data = startData;
-        visualizer = new Visualizer(startData);
 
-        new Thread(() -> {
-            try {
-                runSort();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
-
+    public CocktailShakerSort(int[] data, int speed) {
+        super(data, speed);
+        this.visualizer.getFrame().setTitle("Cocktail Shaker Sort");
     }
 
-    public void runSort() throws InterruptedException {
-        boolean isSorted = false;
-        boolean hasSwapped;
+    @Override
+    public void sort() {
+        int startInterval = 0;
+        int endInterval = this.data.length - 1;
 
-        while (!isSorted) {
-            hasSwapped = false;
-            for (int i = 0; i < this.data.length - 1; i++) {
-                Thread.sleep(1);
-                visualizer.getPanel().setHighlight(i);
-                if (this.data[i] > this.data[i + 1]) {
-                    swap(data, i, i + 1);
-                    hasSwapped = true;
+        while (startInterval < endInterval) {
+            int lastSwap = 0;
+
+            for (int j = startInterval; j < endInterval; j++) {
+                this.visualizer.getPanel().setHighlight(j, j + 1);
+                if (this.data[j] > this.data[j + 1]) {
+                    swap(j, j + 1);
+                    lastSwap = j;
                 }
-            }
-            for (int i = this.data.length - 2; i > 0; i--) {
-                Thread.sleep(1);
-                visualizer.getPanel().setHighlight(i);
-                if (this.data[i] > this.data[i + 1]) {
-                    swap(data, i, i + 1);
-                    hasSwapped = true;
-                }
+
+                try { Thread.sleep(speed); }
+                catch (InterruptedException e) { throw new RuntimeException(e); }
             }
 
-            if (!hasSwapped) {
-                isSorted = true;
+            if (lastSwap == 0) break;
+
+            endInterval = lastSwap;
+
+            lastSwap = 0;
+            for (int j = endInterval; j > startInterval; j--) {
+                this.visualizer.getPanel().setHighlight(j, j + 1);
+
+                if (this.data[j] < this.data[j - 1]) {
+                    swap(j, j - 1);
+                    lastSwap = j;
+                }
+
+                try { Thread.sleep(speed); }
+                catch (InterruptedException e) { throw new RuntimeException(e); }
             }
+
+            startInterval = lastSwap;
         }
+
+        this.visualizer.pauseTimer();
     }
 
-
-    public int[] swap(int[] data, int start, int end) {
-        int temp = data[start];
-        data[start] = data[end];
-        data[end] = temp;
-        return data;
-    }
 }
