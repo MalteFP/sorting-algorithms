@@ -1,5 +1,6 @@
 public abstract class Sorter {
     Visualizer visualizer;
+    Thread thread;
     int[] data;
     int speed;
 
@@ -7,9 +8,7 @@ public abstract class Sorter {
         this.data = data;
         this.speed = speed;
         this.visualizer = new Visualizer(data,"Loading");
-        new Thread(this::sort).start();
-        this.visualizer.startTimer();
-
+        thread = new Thread(this::sort);
     }
 
     public int[] swap(int start, int end) {
@@ -18,6 +17,15 @@ public abstract class Sorter {
         this.data[end] = temp;
         return this.data;
     }
+
+    public void sleep() {
+        try {
+            Thread.sleep(this.speed);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public abstract void sort();
 

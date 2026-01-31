@@ -3,12 +3,13 @@ import javax.swing.*;
 public class BubbleSort extends Sorter {
     public BubbleSort(int[] data, int speed) {
         super(data, speed);
-        this.visualizer.getFrame().setTitle("Bubble Sort");
+        visualizer.getFrame().setTitle("Bubble Sort");
     }
 
 
     @Override
     public void sort() {
+        visualizer.startTimer();
         int latestSwap = data.length - 1;
         int endInterval;
         for(int i = 0; i < data.length; i++) {
@@ -17,11 +18,7 @@ public class BubbleSort extends Sorter {
             latestSwap = -1;
             for(int j = 0; j < endInterval; j++) {
                 visualizer.getPanel().setHighlight(j,j + 1);
-                try {
-                    Thread.sleep(speed);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                sleep();
                 if(data[j] > data[j + 1]) {
                     swap(j,j + 1);
                     latestSwap = j + 1;
@@ -29,7 +26,7 @@ public class BubbleSort extends Sorter {
             }
             if(latestSwap == -1) {break;}
         }
-        this.visualizer.pauseTimer();
+        visualizer.pauseTimer();
 
     }
 

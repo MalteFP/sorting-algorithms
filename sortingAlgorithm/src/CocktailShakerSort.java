@@ -3,11 +3,12 @@ public class CocktailShakerSort extends Sorter {
 
     public CocktailShakerSort(int[] data, int speed) {
         super(data, speed);
-        this.visualizer.getFrame().setTitle("Cocktail Shaker Sort");
+        visualizer.getFrame().setTitle("Cocktail Shaker Sort");
     }
 
     @Override
     public void sort() {
+        visualizer.startTimer();
         int startInterval = 0;
         int endInterval = this.data.length - 1;
 
@@ -21,8 +22,7 @@ public class CocktailShakerSort extends Sorter {
                     lastSwap = j;
                 }
 
-                try { Thread.sleep(speed); }
-                catch (InterruptedException e) { throw new RuntimeException(e); }
+                sleep();
             }
 
             if (lastSwap == 0) break;
@@ -38,14 +38,13 @@ public class CocktailShakerSort extends Sorter {
                     lastSwap = j;
                 }
 
-                try { Thread.sleep(speed); }
-                catch (InterruptedException e) { throw new RuntimeException(e); }
+                sleep();
             }
 
             startInterval = lastSwap;
         }
 
-        this.visualizer.pauseTimer();
+        visualizer.pauseTimer();
     }
 
 }
