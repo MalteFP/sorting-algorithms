@@ -1,14 +1,15 @@
 public abstract class Sorter {
-    Visualizer visualizer;
-    Thread thread;
-    int[] data;
-    int speed;
+    protected Visualizer visualizer;
+    protected Thread thread;
+    protected int[] data;
+    protected int speed;
+    private Stopwatch stopwatch = new Stopwatch();
 
     public Sorter(int[] data, int speed) {
         this.data = data;
         this.speed = speed;
-        this.visualizer = new Visualizer(data,"Loading");
-        thread = new Thread(this::sort);
+        this.visualizer = new Visualizer(data,"Loading", stopwatch);
+        thread = new Thread(this::runTread);
     }
 
     public int[] swap(int start, int end) {
@@ -24,6 +25,13 @@ public abstract class Sorter {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void runTread()
+    {
+        stopwatch.start();
+        this.sort();
+        stopwatch.stop();
     }
 
 

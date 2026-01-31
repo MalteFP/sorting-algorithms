@@ -7,7 +7,7 @@ public class SorterController extends JFrame {
 
     public SorterController() {
         setTitle("Sorter Controller");
-        setSize(200,100);
+        setSize(300,100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
 
@@ -16,6 +16,7 @@ public class SorterController extends JFrame {
         startButton.addActionListener(e -> {
             for (Sorter sorter : sorters) {
                 sorter.thread.start();
+
             }
         });
 
@@ -27,12 +28,14 @@ public class SorterController extends JFrame {
     }
 
     private void createSorters() {
-        int[] baseData = ArrayMaker.randomArray(100);
+        //int[] baseData1 = ArrayMaker.randomArray(2500);
+        int[] baseData2 = ArrayMaker.randomLinearArray(10);
 
-        sorters.add(new BubbleSort(baseData.clone(),10));
-        sorters.add(new InsertionSort(baseData.clone(),10));
-        sorters.add(new MergeSort(baseData.clone(),10));
-        sorters.add(new CocktailShakerSort(baseData.clone(),10));
+        sorters.add(new BubbleSort(baseData2.clone(),100));
+        sorters.add(new InsertionSort(baseData2.clone(),1));
+        sorters.add(new MergeSort(baseData2.clone(),100));
+        sorters.add(new MergeSort(baseData2.clone(),1));
+        sorters.add(new CocktailShakerSort(baseData2.clone(),1));
 
     }
 

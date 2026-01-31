@@ -30,7 +30,6 @@ public class BarPanel extends JPanel {
 
         int width = getWidth();
         int height = getHeight();
-        int barWidth = width / values.length;
 
         int max = 0;
         for (int i = 0; i < values.length; i++) {
@@ -39,8 +38,11 @@ public class BarPanel extends JPanel {
             }
         }
 
+        double xRatio = (double)width / (double)values.length;
+        int barWidth = (int) Math.max(xRatio, 1);
+
         for(int i = 0; i < values.length; i++) {
-            int barHeight = (int) ((values[i] / (double) max) * (height - 20));
+            int barHeight = (int) ((values[i] / (double) max) * (height));
 
             if(i == hightlightA || i == hightlightB) {
                 g.setColor(Color.RED);
@@ -48,11 +50,8 @@ public class BarPanel extends JPanel {
                 g.setColor(Color.BLUE);
             }
 
-            g.fillRect(i * barWidth, height - barHeight, barWidth - 2, barHeight);
+            g.fillRect((int)(i * xRatio) , height - barHeight, barWidth - 2, barHeight);
         }
-
-
-
     }
 
     public void setValues(int[] newValues) { this.values = newValues; repaint();}

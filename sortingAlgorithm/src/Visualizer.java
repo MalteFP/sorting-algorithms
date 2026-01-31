@@ -5,7 +5,7 @@ import java.awt.*;
 
 
 public class Visualizer {
-
+    private Stopwatch stopwatch;
     private BarPanel panel;
     private int[] data;
     private String windowTitle;
@@ -14,19 +14,18 @@ public class Visualizer {
     private int seconds;
     private JLabel timerLabel;
 
-   public Visualizer(int[] data, String windowTitle) {
+   public Visualizer(int[] data, String windowTitle, Stopwatch stopwatch) {
        this.data = data;
        this.windowTitle = windowTitle;
        this.frame = new JFrame(this.windowTitle);
-
+       this.stopwatch = stopwatch;
 
 
        timerLabel = new JLabel("Time: 0 ms");
        frame.add(timerLabel, BorderLayout.NORTH);
 
        timer = new Timer(1, e-> {
-           seconds++;
-           timerLabel.setText("Time: " + seconds + " ms");
+           timerLabel.setText("Time: " + stopwatch.elapsedMillis()  + " ms");
        });
 
        panel = new BarPanel();
