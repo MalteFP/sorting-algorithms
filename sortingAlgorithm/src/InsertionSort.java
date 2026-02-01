@@ -6,7 +6,6 @@ public class InsertionSort extends Sorter{
 
     @Override
     public void sort() {
-        visualizer.startTimer();
         for(int i = 1; i < data.length; i++){
 
             int key = data[i];
@@ -19,6 +18,5 @@ public class InsertionSort extends Sorter{
             }
             data[j+1] = key;
         }
-        visualizer.pauseTimer();
     }
 }

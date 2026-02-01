@@ -24,9 +24,6 @@ public class Visualizer {
        timerLabel = new JLabel("Time: 0 ms");
        frame.add(timerLabel, BorderLayout.NORTH);
 
-       timer = new Timer(1, e-> {
-           timerLabel.setText("Time: " + stopwatch.elapsedMillis()  + " ms");
-       });
 
        panel = new BarPanel();
        frame.add(panel, BorderLayout.CENTER);
@@ -44,14 +41,7 @@ public class Visualizer {
        return panel;
    }
 
-   public void setData(int[] data) {
-       this.data = data;
-       panel.showArray(data);
-   }
 
-   public void getData(int[] data) {
-       this.data = data;
-   }
 
    public JFrame getFrame() {
        return frame;
@@ -63,6 +53,11 @@ public class Visualizer {
 
    public void startTimer() {
        timer.start();
+   }
+
+   public void visualize() {
+       panel.repaint();
+       timerLabel.setText("Time: " + stopwatch.elapsedMillis()  + " ms");
    }
 
 }

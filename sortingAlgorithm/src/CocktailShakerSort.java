@@ -8,7 +8,6 @@ public class CocktailShakerSort extends Sorter {
 
     @Override
     public void sort() {
-        visualizer.startTimer();
         int startInterval = 0;
         int endInterval = this.data.length - 1;
 
@@ -43,8 +42,13 @@ public class CocktailShakerSort extends Sorter {
 
             startInterval = lastSwap;
         }
+    }
 
-        visualizer.pauseTimer();
+    public int[] swap(int start, int end) {
+        int temp = this.data[start];
+        this.data[start] = this.data[end];
+        this.data[end] = temp;
+        return this.data;
     }
 
 }

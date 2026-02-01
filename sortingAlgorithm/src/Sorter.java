@@ -1,3 +1,5 @@
+import javax.swing.Timer;
+
 public abstract class Sorter {
     protected Visualizer visualizer;
     protected Thread thread;
@@ -9,17 +11,15 @@ public abstract class Sorter {
         this.data = data;
         this.speed = speed;
         this.visualizer = new Visualizer(data,"Loading", stopwatch);
-        thread = new Thread(this::runTread);
+        thread = new Thread(this::runSorter);
     }
 
-    public int[] swap(int start, int end) {
-        int temp = this.data[start];
-        this.data[start] = this.data[end];
-        this.data[end] = temp;
-        return this.data;
-    }
+
 
     public void sleep() {
+        if(this.speed == 0) {
+            return;
+        }
         try {
             Thread.sleep(this.speed);
         } catch (InterruptedException e) {
@@ -27,11 +27,18 @@ public abstract class Sorter {
         }
     }
 
-    public void runTread()
-    {
+    public void runSorter() {
         stopwatch.start();
+        new Thread(this::RunVisualizer).start();
         this.sort();
         stopwatch.stop();
+    }
+
+    public void RunVisualizer() {
+        Timer VisualizerClock = new Timer(10, e-> {
+            visualizer.visualize();
+        });
+        VisualizerClock.start();
     }
 
 

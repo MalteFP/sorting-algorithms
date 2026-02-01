@@ -29,13 +29,12 @@ public class SorterController extends JFrame {
 
     private void createSorters() {
         //int[] baseData1 = ArrayMaker.randomArray(2500);
-        int[] baseData2 = ArrayMaker.randomLinearArray(10);
-
-        sorters.add(new BubbleSort(baseData2.clone(),100));
-        sorters.add(new InsertionSort(baseData2.clone(),1));
-        sorters.add(new MergeSort(baseData2.clone(),100));
-        sorters.add(new MergeSort(baseData2.clone(),1));
-        sorters.add(new CocktailShakerSort(baseData2.clone(),1));
+        int[] baseData2 = ArrayMaker.randomLinearArray(500000000);
+        //sorters.add(new BubbleSort(baseData2.clone(),1));
+        //sorters.add(new InsertionSort(baseData2.clone(),1));
+        sorters.add(new MergeSort(baseData2.clone(),0));
+        //sorters.add(new MergeSort(baseData2.clone(),1));
+        //sorters.add(new CocktailShakerSort(baseData2.clone(),1));
 
     }
 

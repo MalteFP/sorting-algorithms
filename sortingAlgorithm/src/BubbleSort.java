@@ -9,7 +9,6 @@ public class BubbleSort extends Sorter {
 
     @Override
     public void sort() {
-        visualizer.startTimer();
         int latestSwap = data.length - 1;
         int endInterval;
         for(int i = 0; i < data.length; i++) {
@@ -26,8 +25,13 @@ public class BubbleSort extends Sorter {
             }
             if(latestSwap == -1) {break;}
         }
-        visualizer.pauseTimer();
+    }
 
+    public int[] swap(int start, int end) {
+        int temp = this.data[start];
+        this.data[start] = this.data[end];
+        this.data[end] = temp;
+        return this.data;
     }
 
 

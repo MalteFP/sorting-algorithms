@@ -8,9 +8,7 @@ public class MergeSort extends Sorter{
 
     @Override
     public void sort() {
-        visualizer.startTimer();
         mergeSort(data, 0, data.length - 1);
-        visualizer.pauseTimer();
     }
 
 
