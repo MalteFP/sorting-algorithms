@@ -15,14 +15,20 @@ public class QuickSort extends Sorter{
     }
 
     public void quickSort(int left, int right) {
-        if (left < right) {
-            visualizer.getPanel().setHighlight(left, right);
+        while (left < right) {
             int pivot = randomPartition(left, right);
-            visualizer.getPanel().setHighlight(pivot,right);
-            quickSort(left, pivot - 1);
-            quickSort(pivot + 1, right);
+
+            // Recurse on smaller side first
+            if (pivot - left < right - pivot) {
+                quickSort(left, pivot - 1);
+                left = pivot + 1;   // tail recursion eliminated
+            } else {
+                quickSort(pivot + 1, right);
+                right = pivot - 1;  // tail recursion eliminated
+            }
         }
     }
+
 
     private int randomPartition(int left, int right) {
         int randomIndex = left + random.nextInt(right - left + 1);
