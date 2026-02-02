@@ -42,10 +42,8 @@ public class BarPanel extends JPanel {
 
         if(width > values.length) {
             visualizeWithMorePixels(width,height,max);
-            System.out.println("MORE");
         } else {
             visualizeWithLessPixels(width,height,max);
-            System.out.println("LESS");
         }
 
 
@@ -53,7 +51,7 @@ public class BarPanel extends JPanel {
 
     private void visualizeWithMorePixels(int width, int height, int max) {
         double xRatio = (double)width / (double)values.length;
-        int barWidth = (int) Math.max(xRatio, 1);
+        int barWidth = (int) Math.ceil(Math.max(xRatio, 1));
 
         for(int i = 0; i < values.length; i++) {
             int barHeight = (int) ((values[i] / (double) max) * (height));
@@ -69,16 +67,30 @@ public class BarPanel extends JPanel {
     }
 
     private void visualizeWithLessPixels(int width, int height, int max) {
-        int elementRation = (int) Math.ceil((double) values.length /width);
+        double ratio = (double) values.length / width;
 
-        for(int i = 0; i < width; i++) {
-            try {
-                int barHeight = (int) ((values[i  * elementRation] / (double) max) * (height));
-                g.fillRect(i , height - barHeight, 1, barHeight);
-            }catch(ArrayIndexOutOfBoundsException _){}
+        for (int x = 0; x < width; x++) {
+            int start = (int) (x * ratio);
+            int end   = (int) ((x + 1) * ratio);
 
+            if (end > values.length) end = values.length;
+
+            int localMax = values[start];
+
+
+
+            int barHeight = (int) ((localMax / (double) max) * height);
+
+            if(start < hightlightA && hightlightA < end || start < hightlightB && hightlightB < end) {
+                g.setColor(Color.RED);
+            } else {
+                g.setColor(Color.BLUE);
+            }
+
+            g.fillRect(x, height - barHeight, 1, barHeight);
         }
     }
+
 
     public void setValues(int[] newValues) { this.values = newValues; repaint();}
 

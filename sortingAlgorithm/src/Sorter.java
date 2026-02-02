@@ -6,6 +6,7 @@ public abstract class Sorter {
     protected int[] data;
     protected int speed;
     private Stopwatch stopwatch = new Stopwatch();
+    private Timer VisualizerClock;
 
     public Sorter(int[] data, int speed) {
         this.data = data;
@@ -32,13 +33,20 @@ public abstract class Sorter {
         new Thread(this::RunVisualizer).start();
         this.sort();
         stopwatch.stop();
+        stopVisualizer();
+        visualizer.visualize();
+        this.data = null;
     }
 
     public void RunVisualizer() {
-        Timer VisualizerClock = new Timer(10, e-> {
+        VisualizerClock = new Timer(10, e-> {
             visualizer.visualize();
         });
         VisualizerClock.start();
+    }
+
+    public void stopVisualizer() {
+        VisualizerClock.stop();
     }
 
 
