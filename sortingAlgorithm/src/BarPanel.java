@@ -1,6 +1,5 @@
 import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
 public class BarPanel extends JPanel {
     private int[] values = {};
@@ -8,13 +7,15 @@ public class BarPanel extends JPanel {
     private int hightlightA = 0;
     private int hightlightB = 0;
     private int max;
+    private String[] text = {};
 
 
 
 
 
-    public void showArray(int[] values){
+    public void showArray(int[] values, String[] text){
         this.values = values;
+        this.text = text;
         for (int i = 0; i < values.length; i++) {
             if (values[i] > max) {
                 max = values[i];
@@ -59,10 +60,34 @@ public class BarPanel extends JPanel {
             if(i == hightlightA || i == hightlightB) {
                 g.setColor(Color.RED);
             } else {
-                g.setColor(Color.BLUE);
+                g.setColor(Color.GRAY);
             }
 
             g.fillRect((int)(i * xRatio) , height - barHeight, barWidth, barHeight);
+
+            String line = String.valueOf(text[i]);
+
+            int fontSize = Math.max(8, barWidth - 2);
+            Graphics2D g2 = (Graphics2D) g.create();
+
+            g2.setFont(new Font("Arial", Font.BOLD, fontSize));
+
+            FontMetrics fm = g2.getFontMetrics();
+
+            int x = (int)(i * xRatio);
+
+            int y = height - barHeight;
+
+            g2.rotate(-Math.PI / 2);
+            g2.setColor(Color.BLACK);
+            g2.drawString(
+                    line,
+                    -height + 5,
+                    x + barWidth / 2 + fm.getAscent() / 2
+            );
+
+            g2.dispose();
+
         }
     }
 

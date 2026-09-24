@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class BogoSort extends Sorter {
-    public BogoSort(int[] data, int speed) {
-        super(data, speed);
+    public BogoSort(int[] data, String[] text, int speed) {
+        super(data, text, speed);
         visualizer.getFrame().setTitle("Bogo Sort");
     }
 
@@ -16,6 +16,11 @@ public class BogoSort extends Sorter {
                 int j = rand.nextInt(i + 1);
                 data[i] = data[j];
                 data[j] = temp;
+
+                String temp_2 = text[i];
+                text[i] = text[j];
+                text[j] = temp_2;
+
                 visualizer.getPanel().setHighlight(i,j);
                 sleep();
             }

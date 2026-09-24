@@ -1,6 +1,6 @@
 public class CountingSort extends Sorter{
-    public CountingSort(int[] data, int speed) {
-        super(data, speed);
+    public CountingSort(int[] data, String[] text, int speed) {
+        super(data, text, speed);
         visualizer.getFrame().setTitle("Counting Sort");
     }
 

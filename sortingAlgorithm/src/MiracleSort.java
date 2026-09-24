@@ -1,6 +1,6 @@
 public class MiracleSort extends Sorter {
-    public MiracleSort(int[] data, int speed) {
-        super(data, speed);
+    public MiracleSort(int[] data, String[] text, int speed) {
+        super(data, text, speed);
         visualizer.getFrame().setTitle("Miracle Sort");
     }
 

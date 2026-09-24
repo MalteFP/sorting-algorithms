@@ -1,8 +1,8 @@
 import java.util.Arrays;
 
 public class MergeSort extends Sorter{
-    public MergeSort(int[] data, int speed) {
-        super(data, speed);
+    public MergeSort(int[] data, String[] text, int speed) {
+        super(data, text, speed);
         visualizer.getFrame().setTitle("Merge Sort");
     }
 

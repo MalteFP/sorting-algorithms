@@ -1,6 +1,6 @@
 public class InsertionSort extends Sorter{
-    public InsertionSort(int[] data, int speed) {
-        super(data, speed);
+    public InsertionSort(int[] data, String[] text, int speed) {
+        super(data, text, speed);
         visualizer.getFrame().setTitle("Insertion Sort");
     }
 

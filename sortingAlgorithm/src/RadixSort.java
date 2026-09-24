@@ -1,6 +1,6 @@
 public class RadixSort extends Sorter {
-    public RadixSort(int[] data, int speed) {
-        super(data, speed);
+    public RadixSort(int[] data, String[] text, int speed) {
+        super(data, text, speed);
         visualizer.getFrame().setTitle("Radix Sort");
     }
 

@@ -8,17 +8,19 @@ public class Visualizer {
     private Stopwatch stopwatch;
     private BarPanel panel;
     private int[] data;
+    private String[] text;
     private String windowTitle;
     private JFrame frame;
     private Timer timer;
     private int seconds;
     private JLabel timerLabel;
 
-   public Visualizer(int[] data, String windowTitle, Stopwatch stopwatch) {
+   public Visualizer(int[] data, String[] text, String windowTitle, Stopwatch stopwatch) {
        this.data = data;
        this.windowTitle = windowTitle;
        this.frame = new JFrame(this.windowTitle);
        this.stopwatch = stopwatch;
+       this.text = text;
 
 
        timerLabel = new JLabel("Time: 0 ms");
@@ -32,7 +34,7 @@ public class Visualizer {
        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        frame.setVisible(true);
 
-       panel.showArray(data);
+       panel.showArray(data, text);
 
    }
 

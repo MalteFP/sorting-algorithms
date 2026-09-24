@@ -4,8 +4,8 @@ public class QuickSort extends Sorter{
 
     private static final Random random = new Random();
 
-    public QuickSort(int[] data, int speed) {
-        super(data, speed);
+    public QuickSort(int[] data, String[] text, int speed) {
+        super(data, text, speed);
         visualizer.getFrame().setTitle("Quick Sort");
     }
 
@@ -54,9 +54,15 @@ public class QuickSort extends Sorter{
     }
 
 
-    public void swap(int start, int end) {
-        int temp = data[start];
-        data[start] = data[end];
-        data[end] = temp;
+    public int[] swap(int start, int end) {
+        int temp = this.data[start];
+        this.data[start] = this.data[end];
+        this.data[end] = temp;
+
+        String temp2 = this.text[start];
+        this.text[start] = this.text[end];
+        this.text[end] = temp2;
+
+        return this.data;
     }
 }

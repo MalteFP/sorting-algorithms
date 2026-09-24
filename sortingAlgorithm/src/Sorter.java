@@ -4,14 +4,16 @@ public abstract class Sorter {
     protected Visualizer visualizer;
     protected Thread thread;
     protected int[] data;
+    protected String[] text;
     protected int speed;
     private Stopwatch stopwatch = new Stopwatch();
     private Timer VisualizerClock;
 
-    public Sorter(int[] data, int speed) {
+    public Sorter(int[] data, String[] text, int speed) {
         this.data = data;
         this.speed = speed;
-        this.visualizer = new Visualizer(data,"Loading", stopwatch);
+        this.text = text;
+        this.visualizer = new Visualizer(data, text, "Loading", stopwatch);
         thread = new Thread(this::runSorter);
     }
 

@@ -1,6 +1,6 @@
 public class StalinSort extends Sorter {
-    public StalinSort(int[] data, int speed) {
-        super(data, speed);
+    public StalinSort(int[] data, String[] text, int speed) {
+        super(data, text, speed);
         visualizer.getFrame().setTitle("Stalin Sort");
     }
 

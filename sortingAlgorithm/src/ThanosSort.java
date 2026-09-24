@@ -3,8 +3,8 @@ import java.util.Random;
 
 public class ThanosSort extends Sorter {
 
-    public ThanosSort(int[] data, int speed) {
-        super(data, speed);
+    public ThanosSort(int[] data, String[] text, int speed) {
+        super(data, text, speed);
         visualizer.getFrame().setTitle("Thanos Sort");
     }
 

@@ -1,8 +1,8 @@
 import javax.swing.*;
 
 public class BubbleSort extends Sorter {
-    public BubbleSort(int[] data, int speed) {
-        super(data, speed);
+    public BubbleSort(int[] data, String[] text, int speed) {
+        super(data, text, speed);
         visualizer.getFrame().setTitle("Bubble Sort");
     }
 
@@ -31,6 +31,11 @@ public class BubbleSort extends Sorter {
         int temp = this.data[start];
         this.data[start] = this.data[end];
         this.data[end] = temp;
+
+        String temp2 = this.text[start];
+        this.text[start] = this.text[end];
+        this.text[end] = temp2;
+
         return this.data;
     }
 
